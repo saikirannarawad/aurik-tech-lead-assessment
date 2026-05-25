@@ -1,0 +1,60 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1A1B1C1D-0001-0001-0001-000000000001}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1A1B1C1D-0002-0002-0002-000000000002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurik.Monitoring.Domain", "src\Aurik.Monitoring.Domain\Aurik.Monitoring.Domain.csproj", "{AAAAAAAA-0000-0000-0000-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurik.Monitoring.Application", "src\Aurik.Monitoring.Application\Aurik.Monitoring.Application.csproj", "{AAAAAAAA-0000-0000-0000-000000000002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurik.Monitoring.Infrastructure", "src\Aurik.Monitoring.Infrastructure\Aurik.Monitoring.Infrastructure.csproj", "{AAAAAAAA-0000-0000-0000-000000000003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurik.Monitoring.Api", "src\Aurik.Monitoring.Api\Aurik.Monitoring.Api.csproj", "{AAAAAAAA-0000-0000-0000-000000000004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurik.Monitoring.UnitTests", "tests\Aurik.Monitoring.UnitTests\Aurik.Monitoring.UnitTests.csproj", "{BBBBBBBB-0000-0000-0000-000000000001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurik.Monitoring.IntegrationTests", "tests\Aurik.Monitoring.IntegrationTests\Aurik.Monitoring.IntegrationTests.csproj", "{BBBBBBBB-0000-0000-0000-000000000002}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAAAAAAA-0000-0000-0000-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAAAAAA-0000-0000-0000-000000000004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBBBBBBB-0000-0000-0000-000000000002}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AAAAAAAA-0000-0000-0000-000000000001} = {1A1B1C1D-0001-0001-0001-000000000001}
+		{AAAAAAAA-0000-0000-0000-000000000002} = {1A1B1C1D-0001-0001-0001-000000000001}
+		{AAAAAAAA-0000-0000-0000-000000000003} = {1A1B1C1D-0001-0001-0001-000000000001}
+		{AAAAAAAA-0000-0000-0000-000000000004} = {1A1B1C1D-0001-0001-0001-000000000001}
+		{BBBBBBBB-0000-0000-0000-000000000001} = {1A1B1C1D-0002-0002-0002-000000000002}
+		{BBBBBBBB-0000-0000-0000-000000000002} = {1A1B1C1D-0002-0002-0002-000000000002}
+	EndGlobalSection
+EndGlobal
