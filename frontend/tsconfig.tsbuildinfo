@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/api/client.ts","./src/components/statusbadge.tsx","./src/pages/dashboardpage.tsx","./src/pages/ingestionstatuspage.tsx","./src/pages/machinedetailpage.tsx","./src/pages/vendoringestionpage.tsx","./src/vendor/templates.ts"],"version":"5.9.3"}
