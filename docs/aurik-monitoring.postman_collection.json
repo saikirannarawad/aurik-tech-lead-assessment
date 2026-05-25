@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "Aurik Monitoring API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Industrial equipment monitoring backend — vendor ingestion + derived attention view."
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "pulseForgeKey", "value": "pf-dev-key-change-me" },
+    { "key": "thermexWatchKey", "value": "tw-dev-key-change-me" },
+    { "key": "maintaFlowKey", "value": "mf-dev-key-change-me" }
+  ],
+  "item": [
+    {
+      "name": "Ingestion",
+      "item": [
+        {
+          "name": "Ingest PulseForge — happy path",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/ingestion/pulseforge",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Vendor-Api-Key", "value": "{{pulseForgeKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vendor\": \"PulseForge\",\n  \"plant_id\": \"PLANT_01\",\n  \"batch_generated_at\": \"2026-04-18T08:05:00Z\",\n  \"events\": [\n    {\n      \"event_id\": \"PF-1001\",\n      \"machine_id\": \"EQ-001\",\n      \"line_id\": \"LINE-A\",\n      \"event_time\": \"2026-04-18T07:59:12Z\",\n      \"event_type\": \"HIGH_VIBRATION\",\n      \"severity\": \"high\",\n      \"vibration_mm_s\": 11.8,\n      \"temperature_c\": 83.2,\n      \"machine_state\": \"running\",\n      \"sensor_health\": 0.91,\n      \"vendor_confidence\": 0.87\n    },\n    {\n      \"event_id\": \"PF-1002\",\n      \"machine_id\": \"EQ-002\",\n      \"line_id\": \"LINE-A\",\n      \"event_time\": \"2026-04-18T07:58:01Z\",\n      \"event_type\": \"TEMP_SPIKE\",\n      \"severity\": \"critical\",\n      \"vibration_mm_s\": 7.1,\n      \"temperature_c\": 96.4,\n      \"machine_state\": \"running\",\n      \"sensor_health\": 0.76,\n      \"vendor_confidence\": 0.81\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Ingest ThermexWatch — sample",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/ingestion/thermexwatch",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Vendor-Api-Key", "value": "{{thermexWatchKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"ThermexWatch\",\n  \"site_code\": \"PLANT_01\",\n  \"response_time_epoch_ms\": 1776499560000,\n  \"readings\": [\n    {\n      \"readingId\": \"TW-8801\",\n      \"assetCode\": \"EQ-001\",\n      \"productionLine\": \"A\",\n      \"timestampMs\": 1776499152000,\n      \"alertCode\": \"VIB_WARN\",\n      \"level\": 4,\n      \"vibration_g\": 0.81,\n      \"temperature_f\": 181.2,\n      \"power_kw\": 37.8,\n      \"is_active\": true,\n      \"signal_quality\": \"GOOD\"\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Ingest MaintaFlow — sample",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/ingestion/maintaflow",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Vendor-Api-Key", "value": "{{maintaFlowKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider_name\": \"MaintaFlow\",\n  \"factory_id\": \"PLANT_01\",\n  \"records\": [\n    {\n      \"record_id\": \"MF-501\",\n      \"machine_ref\": \"EQ-001\",\n      \"line_ref\": \"LINE-A\",\n      \"recorded_at\": \"2026/04/18 08:14:05\",\n      \"record_type\": \"inspection\",\n      \"inspection_result\": \"minor_defect_found\",\n      \"maintenance_status\": \"not_due\",\n      \"days_since_last_service\": 18,\n      \"technician_note\": \"Belt wear visible; machine still operational\",\n      \"manual_confidence\": \"medium\"\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Ingest PulseForge — without API key (expect 401)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/ingestion/pulseforge",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Processing status",
+      "item": [
+        {
+          "name": "Recent payloads",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/processing/recent?limit=50" }
+        },
+        {
+          "name": "Dead-letter queue",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/processing/dead-letters?limit=50" }
+        },
+        {
+          "name": "Status by id",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/processing/status/{{rawPayloadId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Machines",
+      "item": [
+        {
+          "name": "List machine views",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/machines" }
+        },
+        {
+          "name": "List — needs attention only",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/machines?minAttention=Moderate" }
+        },
+        {
+          "name": "Get machine view",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/machines/EQ-001/view" }
+        },
+        {
+          "name": "Get recent events for a machine",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/machines/EQ-001/events?limit=20" }
+        }
+      ]
+    },
+    {
+      "name": "Plants",
+      "item": [
+        {
+          "name": "List plants",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/plants" }
+        },
+        {
+          "name": "Plant summary",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/plants/PLANT_01/summary" }
+        },
+        {
+          "name": "Line summary",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/plants/PLANT_01/lines/LINE-A/summary" }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/health" }
+    }
+  ]
+}
